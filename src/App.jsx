@@ -167,14 +167,14 @@ function App() {
 
   function findArea(cursor, targetId, path, state) {
     if (cursor.id === targetId) {
-      return state ? path + `${cursor.id}` : path;
+      return (state ? `${path}${cursor.id}` : path)
     }
     if (cursor.innerChild.length === 0) {
       return "";
     }
     return cursor.innerChild
       .map((item) => {
-        return findArea(item, targetId, path + `${cursor.id}-`);
+        return findArea(item, targetId, path + `${cursor.id}-`, state);
       })
       .join("");
   }
@@ -222,7 +222,7 @@ function App() {
     let end = [];
 
     codes.forEach((item) => {
-      let thing = findArea(item, draggableId, "", false);
+      let thing = findArea(item, draggableId, "");
       from.push(thing ? thing : "");
     });
     from = from.join("").split("-");
@@ -230,11 +230,12 @@ function App() {
     const tmp = getDeleteCode(codes, codes, from, source.index);
 
     codes.forEach((item) => {
-      let thing = findArea(item, destination.droppableId, "", true);
+      let thing = findArea(item, destination.droppableId, "", "destination");
       end.push(thing ? thing : "");
     });
 
     end = end.join("").split("-");
+    
     
     addCode(codes, codes, end, destination.index, tmp);
   }
