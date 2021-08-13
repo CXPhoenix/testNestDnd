@@ -1,7 +1,8 @@
 # Test Nested Drag and Drop Functions
 
 > author: CXPhoenix\
-> credit: CC.BY.NC
+> credit: CC.BY.NC\
+> version: 0.1.0
 
 ---
 # template-vite-react-tailwind-jit
